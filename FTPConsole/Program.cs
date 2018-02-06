@@ -39,8 +39,8 @@ namespace FTPConsole
             IPAddress ipAddress = new IPAddress(new byte[] { 127, 0, 0, 1 });
             FTPManager ftpManager = new FTPManager(ipAddress, 21, "admin", "admin");
 
-            string fileName = Path.GetFileName(path);
-            List<string> stripMarkingFolders = GetStripMarkingFolders(fileName);
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(path);
+            List<string> stripMarkingFolders = GetStripMarkingFolders(fileNameWithoutExtension);
 
             Console.WriteLine("Creating Parent Folder...");
             string parentFolder = string.Empty;
@@ -58,7 +58,7 @@ namespace FTPConsole
                 }
             }
 
-            string remotePath = parentFolder + "/" + fileName;
+            string remotePath = parentFolder + "/" + Path.GetFileName(path);
 
             Console.WriteLine("Uploading XML file to {0}", remotePath);
             ftpManager.Upload(path, remotePath);
