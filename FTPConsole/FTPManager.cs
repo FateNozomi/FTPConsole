@@ -124,6 +124,7 @@ namespace FTPConsole
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(
                 new Uri(URI, remotePath));
             request.Credentials = new NetworkCredential(_userName, _password);
+            request.UsePassive = false;
             request.Method = ftpWebRequestMethod;
 
             return request;
